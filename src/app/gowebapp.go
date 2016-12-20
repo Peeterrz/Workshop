@@ -5,7 +5,9 @@ import (
 	"log"
 	"os"
 	"runtime"
-
+	"flag"
+	"path/filepath"
+	
 	"app/route"
 	"app/shared/database"
 	"app/shared/email"
@@ -31,7 +33,10 @@ func init() {
 
 func main() {
 	// Load the configuration file
-	jsonconfig.Load("config"+string(os.PathSeparator)+"config.json", config)
+	//jsonconfig.Load("config"+string(os.PathSeparator)+"config.json", config)
+	dir, _ := filepath.Abs(filepath.Dir(os.Args[0]))
+	configPath := flag.String("config", dir+string(os.PathSeparator)+"config"+string(os.PathSeparator)+"config.json", "config filepath")
+	jsonconfig.Load(*configPath, config)
 
 	// Configure the session cookie store
 	session.Configure(config.Session)
