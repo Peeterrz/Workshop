@@ -9,11 +9,11 @@
 			"Database": "gowebapp"
 		},
 		"MySQL": {
-			"Username": "root",
-			"Password": "",
-			"Name": "gowebapp",
-			"Hostname": "127.0.0.1",
-			"Port": 3306,
+			"Username": "workshopadm",
+			"Password": "workshopadm",
+			"Name": "zeroworkshop",
+			"Hostname": "172.16.150.199",
+			"Port": 13306,
 			"Parameter": "?parseTime=true"
 		}
 	},
