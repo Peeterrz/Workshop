@@ -1,6 +1,4 @@
-@echo off
-
-set GOPATH=%CD%
+export GOPATH=$PWD
 go get -v github.com/nsf/gocode
 go get -v golang.org/x/tools/cmd/guru
 go get -v github.com/rogpeppe/godef
@@ -10,5 +8,3 @@ go get -v gopkg.in/mgo.v2
 go get -v gopkg.in/mgo.v2/bson
 go get -v ./...
 go get -v ./...
-
-pause
