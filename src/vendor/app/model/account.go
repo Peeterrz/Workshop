@@ -12,7 +12,7 @@ type Account struct {
 	PROVINCE 			int64 		`db:"province"`
 }
 
-func GetAccount(accountNumber int) (Account, error){
+func AccountByAccountNo(accountNo int) (Account, error){
 	
 	var err error
 
