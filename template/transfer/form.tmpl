@@ -1,0 +1,40 @@
+{{define "title"}}โอนเงิน{{end}}
+{{define "head"}}{{end}}
+{{define "content"}}
+
+<div class="container">
+	<div class="page-header">
+		<h1>{{template "title" .}}</h1>
+	</div>
+	
+	<form method="post">
+		<div class="form-group">
+			<label for="from_acc_no">จากบัญชี</label>
+			<div><span id="from_acc_no" name="from_acc_no"></span></div>
+		</div>
+		<div class="form-group">
+			<label for="to_acc_no">ไปยังบัญชี</label>
+			<div><input type="number" class="form-control" id="to_acc_no" name="to_acc_no" maxlength="10" value="" /></div>
+		</div>
+		<div class="form-group">
+			<label for="bank_code">ธนาคาร</label>
+			<div>
+				<select id="bank_code" name="bank_code">
+					<option value="1">Bank 1</option>
+					<option value="2">Bank 2</option>
+					<option value="3">Bank 3</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="tamt">จำนวนเงิน</label>
+			<div><input type="number" class="form-control" id="tamt" name="tamt" maxlength="20" value="" /></div>
+		</div>
+		
+		<input type="button" class="btn btn-primary" value="กลับหน้าแรก" class="button" />
+		<input type="submit" class="btn btn-primary" value="ตกลง" class="button" />
+	</form>
+</div>
+
+{{end}}
+{{define "foot"}}{{end}}
