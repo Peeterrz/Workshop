@@ -1,0 +1,37 @@
+{{define "title"}}Account Overview{{end}}
+{{define "head"}}{{end}}
+{{define "content"}}
+
+<div class="container">
+	<div class="page-header">
+		<h1>{{template "title" .}}</h1>
+	</div>
+	<form method="post">
+		<div class="form-group">
+			<label for="Acount Name">ชื่อบัญชี</label>&nbsp;
+			<span id="acc_name" name="acc_name" >{{.acc_name}}</span>
+			<input type="hidden" class="form-control" id="acc_name" name="acc_name" placeholder="Account Name" value="{{.acc_name}}"/>
+		</div>
+		
+		<div class="form-group">
+			<label for="Account No">เลขที่บัญชี</label>&nbsp;
+			<span id="acc_no" name="acc_no" >{{.acc_no}}</span>
+			<div><input type="hidden" class="form-control" id="acc_no" name="acc_no" placeholder="Account No" value="{{.acc_no}}" /></div>
+		</div>
+		
+		<div class="form-group">
+			<label for="Account Balance">ยอดคงเหลือ</label>
+			<span id="acc_bal" name="acc_bal" >{{.acc_bal}}</span>
+			<div><input type="hidden" class="form-control" id="acc_bal" name="acc_bal" placeholder="Account Balance" value="{{.acc_bal}}" /></div>
+		</div>
+	</form>
+	
+	<p style="margin-top: 15px;color:red;">
+	{{.errorMessage}}
+	</p>
+	
+	{{template "footer" .}}
+</div>
+
+{{end}}
+{{define "foot"}}{{end}}

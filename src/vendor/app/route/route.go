@@ -115,7 +115,7 @@ func routes() *httprouter.Router {
 
 	// Enable Pprof
 	r.GET("/debug/pprof/*pprof", hr.Handler(alice.
-		New(acl.DisallowAnon).
+		New().
 		ThenFunc(pprofhandler.Handler)))
 
 	// Account Overview
