@@ -10,7 +10,6 @@ import (
 	"app/shared/view"
 
 	"github.com/gorilla/context"
-	"github.com/josephspurrier/csrfbanana"
 	"github.com/julienschmidt/httprouter"
 )
 
@@ -37,13 +36,10 @@ func NotepadReadGET(w http.ResponseWriter, r *http.Request) {
 
 // NotepadCreateGET displays the note creation page
 func NotepadCreateGET(w http.ResponseWriter, r *http.Request) {
-	// Get session
-	sess := session.Instance(r)
-
 	// Display the view
 	v := view.New(r)
 	v.Name = "notepad/create"
-	v.Vars["token"] = csrfbanana.Token(w, r, sess)
+	//v.Vars["token"] = csrfbanana.Token(w, r, sess)
 	v.Render(w)
 }
 
@@ -108,7 +104,7 @@ func NotepadUpdateGET(w http.ResponseWriter, r *http.Request) {
 	// Display the view
 	v := view.New(r)
 	v.Name = "notepad/update"
-	v.Vars["token"] = csrfbanana.Token(w, r, sess)
+	//v.Vars["token"] = csrfbanana.Token(w, r, sess)
 	v.Vars["note"] = note.Content
 	v.Render(w)
 }
