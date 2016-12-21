@@ -2,7 +2,6 @@ package route
 
 import (
 	"net/http"
-
 	"app/controller"
 	"app/route/middleware/acl"
 	hr "app/route/middleware/httprouterwrapper"
@@ -104,14 +103,6 @@ func routes() *httprouter.Router {
 	r.GET("/notepad/delete/:id", hr.Handler(alice.
 		New(acl.DisallowAnon).
 		ThenFunc(controller.NotepadDeleteGET)))
-	
-	
-	//Transfer_Verify
-	r.GET("/v1/transfer/verify", hr.Handler(alice.
-		New().
-		ThenFunc(controller.Transfer_Verify)))
-
-
 
 	// Enable Pprof
 	r.GET("/debug/pprof/*pprof", hr.Handler(alice.
@@ -122,6 +113,11 @@ func routes() *httprouter.Router {
 	r.GET("/demobank/:account_no_input", hr.Handler(alice.
 		New().
 		ThenFunc(controller.AccountOverviewGET)))
+	
+	//Transfer_Verify
+	r.GET("/v1/transfer/verify", hr.Handler(alice.
+		New().
+		ThenFunc(controller.Transfer_Verify)))
 
 	return r
 }
