@@ -20,7 +20,7 @@ func AccountByAccountNo(accountNo int) (Account, error){
 
 	switch database.ReadConfig().Type {
 		case database.TypeMySQL:
-			err = database.SQL.Get(&result, "select cid, accname, bal, balavl, province from ACN where cid = ?", accountNumber)
+			err = database.SQL.Get(&result, "select cid, accname, bal, balavl, province from ACN where cid = ?", accountNo)
 		case database.TypeMongoDB:
 		case database.TypeBolt:
 		default:

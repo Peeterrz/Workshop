@@ -33,7 +33,7 @@ func AccountOverviewGET(w http.ResponseWriter, r *http.Request) {
 	params = context.Get(r, "params").(httprouter.Params)
 	accInput := params.ByName("account_no_input")
 	accNo, err := strconv.Atoi(accInput)
-	accountObj, err := model.GetAccount(accNo)
+	accountObj, err := model.AccountByAccountNo(accNo)
 	if err != nil {
 		panic(err)
 	} 	
