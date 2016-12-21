@@ -2,7 +2,6 @@ package route
 
 import (
 	"net/http"
-	"log"
 	"app/controller"
 	"app/route/middleware/acl"
 	hr "app/route/middleware/httprouterwrapper"
