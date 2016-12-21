@@ -105,7 +105,7 @@ func routes() *httprouter.Router {
 
 	// Enable Pprof
 	r.GET("/debug/pprof/*pprof", hr.Handler(alice.
-		New(acl.DisallowAnon).
+		New().
 		ThenFunc(pprofhandler.Handler)))
 	
 	// Account Overview
@@ -120,6 +120,10 @@ func routes() *httprouter.Router {
 	r.POST("/v1/transfer", hr.Handler(alice.
 		New().
 		ThenFunc(controller.TransferPOST)))
+	//Transfer_Verify
+	r.GET("/v1/transfer/verify", hr.Handler(alice.
+		New().
+		ThenFunc(controller.Transfer_Verify)))
 	
 	return r
 }
