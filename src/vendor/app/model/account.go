@@ -10,6 +10,7 @@ type Account struct {
 	BAL					float64 	`db:"bal"`
 	BALAVL 				float64 	`db:"balavl"`
 	PROVINCE 			int64 		`db:"province"`
+	TRNO 				int64 		`db:"trno"`
 }
 
 func AccountByAccountNo(accountNo int) (Account, error){
@@ -20,7 +21,7 @@ func AccountByAccountNo(accountNo int) (Account, error){
 
 	switch database.ReadConfig().Type {
 		case database.TypeMySQL:
-			err = database.SQL.Get(&result, "select cid, accname, bal, balavl, province from ACN where cid = ?", accountNo)
+			err = database.SQL.Get(&result, "select cid, accname, bal, balavl, province,trno from ACN where cid = ?", accountNo)
 		case database.TypeMongoDB:
 		case database.TypeBolt:
 		default:
