@@ -9,6 +9,9 @@ TC_AccountOverview_1
 
 TC_AccountOverview_2
 	ค้นหาเลขที่บัญชี    123456789    1234567890    นายทดสอบ ระบบ    10,000.00    TC_AccountOverview_2
+	
+TC_AccountOverview_3
+	ค้นหาเลขที่บัญชี    123456789    1234567890    นายทดสอบ ระบบ    10,000.00    TC_AccountOverview_3
 
 *** Keywords ***
 ค้นหาเลขที่บัญชี
