@@ -2,15 +2,14 @@ package route
 
 import (
 	"net/http"
+
 	"app/controller"
 	"app/route/middleware/acl"
 	hr "app/route/middleware/httprouterwrapper"
 	"app/route/middleware/logrequest"
 	"app/route/middleware/pprofhandler"
-	"app/shared/session"
 
 	"github.com/gorilla/context"
-	"github.com/josephspurrier/csrfbanana"
 	"github.com/julienschmidt/httprouter"
 	"github.com/justinas/alice"
 )
@@ -108,17 +107,24 @@ func routes() *httprouter.Router {
 	r.GET("/debug/pprof/*pprof", hr.Handler(alice.
 		New().
 		ThenFunc(pprofhandler.Handler)))
-
+	
 	// Account Overview
 	r.GET("/demobank/:account_no_input", hr.Handler(alice.
 		New().
 		ThenFunc(controller.AccountOverviewGET)))
 	
+	// Account Transfer
+	r.GET("/v1/transfer/form/:acc_no", hr.Handler(alice.
+		New().
+		ThenFunc(controller.TransferGET)))
+	r.POST("/v1/transfer", hr.Handler(alice.
+		New().
+		ThenFunc(controller.TransferPOST)))
 	//Transfer_Verify
 	r.GET("/v1/transfer/verify", hr.Handler(alice.
 		New().
 		ThenFunc(controller.Transfer_Verify)))
-
+	
 	return r
 }
 
@@ -127,16 +133,6 @@ func routes() *httprouter.Router {
 // *****************************************************************************
 
 func middleware(h http.Handler) http.Handler {
-	// Prevents CSRF and Double Submits
-	cs := csrfbanana.New(h, session.Store, session.Name)
-	cs.FailureHandler(http.HandlerFunc(controller.InvalidToken))
-	cs.ClearAfterUsage(true)
-	cs.ExcludeRegexPaths([]string{"/static(.*)"})
-	csrfbanana.TokenLength = 32
-	csrfbanana.TokenName = "token"
-	csrfbanana.SingleToken = false
-	h = cs
-
 	// Log every request
 	h = logrequest.Handler(h)
 

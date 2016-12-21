@@ -11,7 +11,7 @@ import (
 	"app/shared/view"
 
 	"github.com/gorilla/sessions"
-	"github.com/josephspurrier/csrfbanana"
+	
 )
 
 const (
@@ -31,13 +31,10 @@ func loginAttempt(sess *sessions.Session) {
 
 // LoginGET displays the login page
 func LoginGET(w http.ResponseWriter, r *http.Request) {
-	// Get session
-	sess := session.Instance(r)
-
 	// Display the view
 	v := view.New(r)
 	v.Name = "login/login"
-	v.Vars["token"] = csrfbanana.Token(w, r, sess)
+	//v.Vars["token"] = csrfbanana.Token(w, r, sess)
 	// Refill any form fields
 	view.Repopulate([]string{"email"}, r.Form, v.Vars)
 	v.Render(w)

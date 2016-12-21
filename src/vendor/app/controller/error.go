@@ -21,5 +21,6 @@ func Error500(w http.ResponseWriter, r *http.Request) {
 func InvalidToken(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	w.WriteHeader(http.StatusForbidden)
+	//panic(errors.New("hello"))
 	fmt.Fprint(w, `Your token <strong>expired</strong>, click <a href="javascript:void(0)" onclick="location.replace(document.referrer)">here</a> to try again.`)
 }

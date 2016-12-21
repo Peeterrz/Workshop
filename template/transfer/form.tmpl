@@ -7,10 +7,13 @@
 		<h1>{{template "title" .}}</h1>
 	</div>
 	
-	<form method="post">
+	<form method="post" action="/v1/transfer">
 		<div class="form-group">
 			<label for="from_acc_no">จากบัญชี</label>
-			<div><span id="from_acc_no" name="from_acc_no"></span></div>
+			<div>
+				<span id="from_acc_no" name="from_acc_no">{{.from_acc_no}}</span>
+				<input type="hidden" id="#from_acc_no" name="#from_acc_no" value="{{.from_acc_no}}" />
+			</div>
 		</div>
 		<div class="form-group">
 			<label for="to_acc_no">ไปยังบัญชี</label>
@@ -20,9 +23,10 @@
 			<label for="bank_code">ธนาคาร</label>
 			<div>
 				<select id="bank_code" name="bank_code">
-					<option value="1">Bank 1</option>
-					<option value="2">Bank 2</option>
-					<option value="3">Bank 3</option>
+					<option value="">กรุณาเลือกธนาคาร</option>
+					{{range $n := .banks}}
+					<option value="{{.BKCD}}">{{.NAME}}</option>
+					{{end}}
 				</select>
 			</div>
 		</div>
@@ -31,9 +35,11 @@
 			<div><input type="number" class="form-control" id="tamt" name="tamt" maxlength="20" value="" /></div>
 		</div>
 		
-		<input type="button" class="btn btn-primary" value="กลับหน้าแรก" class="button" />
+		<input type="button" class="btn btn-primary" value="กลับหน้าแรก" class="button" onclick="window.location='/login'" />
 		<input type="submit" class="btn btn-primary" value="ตกลง" class="button" />
 	</form>
+	
+	{{template "footer" .}}
 </div>
 
 {{end}}
