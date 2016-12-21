@@ -2,3 +2,5 @@
 pkg/
 *.db.lock
 *.db
+.project
+.settings/
