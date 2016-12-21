@@ -111,16 +111,17 @@ func routes() *httprouter.Router {
 		New().
 		ThenFunc(controller.Transfer_Verify)))
 
-	// Account Overview
-	r.GET("/demobank/:account_no_input", hr.Handler(alice.
-		New().
-		ThenFunc(controller.AccountOverviewGET)))
 
 
 	// Enable Pprof
 	r.GET("/debug/pprof/*pprof", hr.Handler(alice.
 		New(acl.DisallowAnon).
 		ThenFunc(pprofhandler.Handler)))
+
+	// Account Overview
+	r.GET("/demobank/:account_no_input", hr.Handler(alice.
+		New().
+		ThenFunc(controller.AccountOverviewGET)))
 
 	return r
 }
