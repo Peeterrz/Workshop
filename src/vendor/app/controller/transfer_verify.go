@@ -88,7 +88,7 @@ func FeeCal(accountFromObj model.Account ,accountToObj model.Account)(output flo
 	
 	
 	output=0.00
-	if Interregion {
+	if (Interregion) && (accountFromObj.TRNO>10) {
 			output=10.00
 	}
 
