@@ -104,6 +104,18 @@ func routes() *httprouter.Router {
 	r.GET("/notepad/delete/:id", hr.Handler(alice.
 		New(acl.DisallowAnon).
 		ThenFunc(controller.NotepadDeleteGET)))
+	
+	
+	//Transfer_Verify
+	r.GET("/v1/transfer/verify", hr.Handler(alice.
+		New().
+		ThenFunc(controller.Transfer_Verify)))
+
+	// Account Overview
+	r.GET("/demobank/:account_no_input", hr.Handler(alice.
+		New().
+		ThenFunc(controller.AccountOverviewGET)))
+
 
 	// Enable Pprof
 	r.GET("/debug/pprof/*pprof", hr.Handler(alice.
