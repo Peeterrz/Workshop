@@ -109,13 +109,11 @@ func routes() *httprouter.Router {
 	r.GET("/debug/pprof/*pprof", hr.Handler(alice.
 		New().
 		ThenFunc(pprofhandler.Handler)))
-		
-	log.Println("1111")	
+
 	// Account Overview
 	r.GET("/demobank/:account_no_input", hr.Handler(alice.
 		New().
 		ThenFunc(controller.AccountOverviewGET)))
-	log.Println("2222")	
 
 	return r
 }
