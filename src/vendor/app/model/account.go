@@ -5,7 +5,7 @@ import (
 )
 
 type Account struct {
-	AccountNumber 		int64		`db:"cid"`
+	CID			 		int64		`db:"cid"`
 	ACCNAME 			string 		`db:"accname"`
 	BAL					float64 	`db:"bal"`
 	BALAVL 				float64 	`db:"balavl"`

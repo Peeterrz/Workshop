@@ -2,7 +2,7 @@ package route
 
 import (
 	"net/http"
-
+	"log"
 	"app/controller"
 	"app/route/middleware/acl"
 	hr "app/route/middleware/httprouterwrapper"
@@ -107,8 +107,15 @@ func routes() *httprouter.Router {
 
 	// Enable Pprof
 	r.GET("/debug/pprof/*pprof", hr.Handler(alice.
-		New(acl.DisallowAnon).
+		New().
 		ThenFunc(pprofhandler.Handler)))
+		
+	log.Println("1111")	
+	// Account Overview
+	r.GET("/demobank/:account_no_input", hr.Handler(alice.
+		New().
+		ThenFunc(controller.AccountOverviewGET)))
+	log.Println("2222")	
 
 	return r
 }
