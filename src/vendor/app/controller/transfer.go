@@ -7,6 +7,7 @@ import (
 	
 	"app/shared/view"
 	"app/model"
+	"app/utilities"
 	
 	"github.com/gorilla/context"
 	"github.com/julienschmidt/httprouter"
@@ -36,6 +37,7 @@ func Transfer_Verify(w http.ResponseWriter, r *http.Request) {
 	bankInput := r.FormValue("bank_code")
 	trnamtInput := r.FormValue("tamt")
 	
+	trn_amt, err := strconv.ParseFloat(trnamtInput, 64)
 	accfrom, err := strconv.Atoi(accfromInput)
 	accto, err := strconv.Atoi(acctoInput)
 	bankCode, err := strconv.Atoi(bankInput)
@@ -63,16 +65,16 @@ func Transfer_Verify(w http.ResponseWriter, r *http.Request) {
 	v.Vars["to_acc_name"] = accountToObj.ACCNAME
 	v.Vars["bank_code"] = bankObj.BKCD
 	v.Vars["bank_name"] = bankObj.NAME
-	v.Vars["trn_amt"] = trnamtInput
-	v.Vars["fee_amt"] = FeeCal(accountFromObj,accountToObj)
+	v.Vars["trn_amt"] = utilities.ThaiCurrencyFormat(trn_amt)
+	v.Vars["fee_amt"] = utilities.ThaiCurrencyFormat(FeeCal(accountFromObj,accountToObj))
 	v.Render(w)
 }
 
 func Transfer_Post(w http.ResponseWriter, r *http.Request) {
-	accfromInput := r.FormValue("from_acc_no")
-	acctoInput := r.FormValue("to_acc_no")
+	accfromInput := r.FormValue("#from_acc_no")
+	acctoInput := r.FormValue("#to_acc_no")
 	bankInput := r.FormValue("bank_code")
-	trnamtInput := r.FormValue("tamt")
+	trnamtInput := r.FormValue("trn_amt")
 	feeamtInput := r.FormValue("feeamt")
 
 	accfrom, err := strconv.Atoi(accfromInput)

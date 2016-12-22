@@ -55,9 +55,9 @@ func Test_ThaiCurrencyFormat_1000000255_return_100000026(t *testing.T) {
 }
 
 func Test_ThaiCurrencyFormat_1000000254_return_100000025(t *testing.T) {
-	input := 1000000.255
+	input := 1000000.254
 	output := ThaiCurrencyFormat(input)
-	assert.Equal(t, "1,000,000.26 บาท", output)
+	assert.Equal(t, "1,000,000.25 บาท", output)
 }
 
 func Test_ThaiCurrencyFormat_minus1000000254_return_minus100000025(t *testing.T) {
