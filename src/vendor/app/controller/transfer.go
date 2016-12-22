@@ -115,7 +115,7 @@ func Transfer_Post(w http.ResponseWriter, r *http.Request) {
 }
 
 func FeeCal(accountFromObj model.Account ,accountToObj model.Account)(output float64) {
-	Interregion := Interregion(accountFromObj , accountFromObj)
+	Interregion := Interregion(accountFromObj , accountToObj)
 
 	output=0.00
 	if (Interregion) && (accountFromObj.TRNO>10) {
