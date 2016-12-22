@@ -24,8 +24,10 @@ go get -v ./...
 #      fi
 #    fi  
 #done
-#rm -f ./tmp.out
-#cat test.out | go2xunit -output tests.xml
+
+go test vendor/app/utilities -coverprofile=tmp.out ${pkg} >> test.out
+rm -f ./tmp.out
+cat test.out | go2xunit -output tests.xml
 
 # Generate coverage reports (Cobertura plugin)
 #gocov convert coverage.out | gocov-xml > cobertura-coverage.xml
