@@ -30,15 +30,14 @@ rm -f ./tmp.out
 cat test.out | go2xunit -output tests.xml
 
 # Generate coverage reports (Cobertura plugin)
-#gocov convert coverage.out | gocov-xml > cobertura-coverage.xml
-#gocov convert coverage.out | gocov-html > cobertura-coverage.html
+gocov convert coverage.out | gocov-xml > cobertura-coverage.xml
+gocov convert coverage.out | gocov-html > cobertura-coverage.html
 
 # Run lint tools (Compiler warning plugin)
-#golint ./... > lint.txt
+golint ./... > lint.txt
 
 # Run vet tools (Compiler warning plugin)
-#go vet ./... > vet.txt
-
+go vet ./... > vet.txt
 
 # Build application
 go build ./...

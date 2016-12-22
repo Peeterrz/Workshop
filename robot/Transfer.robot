@@ -19,6 +19,8 @@ Transfer Page
 
 Confirmation Page
 	[Arguments]    ${from_acc_no}    ${from_acc_name}    ${to_acc_no}    ${to_acc_name}    ${to_bank_name}    ${tamt}    ${fee_amt}    ${testcase_id}
+    Wait Until Page Contains Element    from_acc_name 
+    Wait Until Element Contains   from_acc_name    ${from_acc_name}    10
     Element Text Should Be    from_acc_no    ${from_acc_no}
 	Element Text Should Be	  from_acc_name    ${from_acc_name}
 	Element Text Should Be    to_acc_no    ${to_acc_no}
