@@ -14,6 +14,6 @@ func PadLeft(str, pad string, lenght int) string {
 }
 
 func ThaiCurrencyFormat(balance float64) string {	
-	ac := accounting.Accounting{Precision: 2}
-    return ac.FormatMoney(balance)+" บาท"
+	formatter := accounting.Accounting{Precision: 2}
+    return formatter.FormatMoney(balance)+" บาท"
 }
