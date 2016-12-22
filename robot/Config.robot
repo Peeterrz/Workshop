@@ -1,2 +1,2 @@
 *** Variables ***
-${URL}    http://172.16.150.199:8888/somkiatbank/account/
+${URL}    http://172.17.102.91:8888/somkiatbank/account/
