@@ -6,7 +6,6 @@ import (
 	"app/controller"
 	hr "app/route/middleware/httprouterwrapper"
 	"app/route/middleware/logrequest"
-	"app/route/middleware/pprofhandler"
 
 	"github.com/gorilla/context"
 	"github.com/julienschmidt/httprouter"
@@ -57,17 +56,7 @@ func routes() *httprouter.Router {
 	r.GET("/", hr.Handler(alice.
 		New().
 		ThenFunc(controller.IndexGET)))
-
-	// About
-	r.GET("/about", hr.Handler(alice.
-		New().
-		ThenFunc(controller.AboutGET)))
-
-	// Enable Pprof
-	r.GET("/debug/pprof/*pprof", hr.Handler(alice.
-		New().
-		ThenFunc(pprofhandler.Handler)))
-
+	
 	// Account Overview
 	r.GET("/somkiatbank/account/:account_no_input", hr.Handler(alice.
 		New().
@@ -77,6 +66,7 @@ func routes() *httprouter.Router {
 	r.GET("/somkiatbank/transfer/form/:acc_no", hr.Handler(alice.
 		New().
 		ThenFunc(controller.TransferGET)))
+
 	r.POST("/somkiatbank/transfer", hr.Handler(alice.
 		New().
 		ThenFunc(controller.Transfer_Verify)))
