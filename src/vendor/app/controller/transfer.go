@@ -18,7 +18,7 @@ func TransferGET(w http.ResponseWriter, r *http.Request) {
 	params = context.Get(r, "params").(httprouter.Params)
 	from_acc_no := params.ByName("acc_no")
 	
-	banks, err := model.GetBanks()
+	banks, err := model.Banks()
 	if err != nil {
 		log.Println(err)
 		banks = []model.Bank{}
@@ -52,7 +52,7 @@ func Transfer_Verify(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 	
-	bankObj, err := model.GetBanksCode(bankCode)
+	bankObj, err := model.BanksByBankCode(bankCode)
 	if err != nil {
 		panic(err)
 	}  
@@ -94,7 +94,7 @@ func Transfer_Post(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 	
-	bankObj, err := model.GetBanksCode(bankCode)
+	bankObj, err := model.BanksByBankCode(bankCode)
 	if err != nil {
 		panic(err)
 	}  
