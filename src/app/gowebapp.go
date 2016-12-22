@@ -2,12 +2,12 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"log"
 	"os"
-	"runtime"
-	"flag"
 	"path/filepath"
-	
+	"runtime"
+
 	"app/route"
 	"app/shared/database"
 	"app/shared/email"
@@ -83,6 +83,6 @@ func (c *configuration) ParseJSON(b []byte) error {
 	return json.Unmarshal(b, &c)
 }
 
-func XX() int{
+func XX() int {
 	return 0
 }

@@ -1,18 +1,14 @@
 package database
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 
-	"github.com/boltdb/bolt"
 	_ "github.com/go-sql-driver/mysql" // MySQL driver
 	"github.com/jmoiron/sqlx"
 )
 
 var (
-	// BoltDB wrapper
-	BoltDB *bolt.DB
 	// SQL wrapper
 	SQL *sqlx.DB
 	// Database info
@@ -96,79 +92,9 @@ func Connect(d Info) {
 		if err = SQL.Ping(); err != nil {
 			log.Println("Database Error", err)
 		}
-	case TypeBolt:
-		// Connect to Bolt
-		if BoltDB, err = bolt.Open(d.Bolt.Path, 0600, nil); err != nil {
-			log.Println("Bolt Driver Error", err)
-		}
 	default:
 		log.Println("No registered database in config")
 	}
-}
-
-// Update makes a modification to Bolt
-func Update(bucketName string, key string, dataStruct interface{}) error {
-	err := BoltDB.Update(func(tx *bolt.Tx) error {
-		// Create the bucket
-		bucket, e := tx.CreateBucketIfNotExists([]byte(bucketName))
-		if e != nil {
-			return e
-		}
-
-		// Encode the record
-		encodedRecord, e := json.Marshal(dataStruct)
-		if e != nil {
-			return e
-		}
-
-		// Store the record
-		if e = bucket.Put([]byte(key), encodedRecord); e != nil {
-			return e
-		}
-		return nil
-	})
-	return err
-}
-
-// View retrieves a record in Bolt
-func View(bucketName string, key string, dataStruct interface{}) error {
-	err := BoltDB.View(func(tx *bolt.Tx) error {
-		// Get the bucket
-		b := tx.Bucket([]byte(bucketName))
-		if b == nil {
-			return bolt.ErrBucketNotFound
-		}
-
-		// Retrieve the record
-		v := b.Get([]byte(key))
-		if len(v) < 1 {
-			return bolt.ErrInvalid
-		}
-
-		// Decode the record
-		e := json.Unmarshal(v, &dataStruct)
-		if e != nil {
-			return e
-		}
-
-		return nil
-	})
-
-	return err
-}
-
-// Delete removes a record from Bolt
-func Delete(bucketName string, key string) error {
-	err := BoltDB.Update(func(tx *bolt.Tx) error {
-		// Get the bucket
-		b := tx.Bucket([]byte(bucketName))
-		if b == nil {
-			return bolt.ErrBucketNotFound
-		}
-
-		return b.Delete([]byte(key))
-	})
-	return err
 }
 
 // ReadConfig returns the database information
