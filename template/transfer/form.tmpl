@@ -9,34 +9,70 @@
 	
 	<form method="post" action="/v1/transfer">
 		<div class="form-group">
-			<label for="from_acc_no">จากบัญชี</label>
-			<div>
-				<span id="from_acc_no" name="from_acc_no">{{.from_acc_no}}</span>
-				<input type="hidden" id="#from_acc_no" name="#from_acc_no" value="{{.from_acc_no}}" />
-			</div>
+			<table class="autoTable">
+				<tr>
+					<td class="lbl form-group">
+						จากบัญชี
+					</td>
+					<td class="form-group">
+						<span id="from_acc_no" name="from_acc_no">{{.from_acc_no}}</span>
+						<input type="hidden" id="#from_acc_no" name="#from_acc_no" value="{{.from_acc_no}}" />
+					</td>
+				</tr>
+			</table>
 		</div>
 		<div class="form-group">
-			<label for="to_acc_no">ไปยังบัญชี</label>
-			<div><input type="number" class="form-control" id="to_acc_no" name="to_acc_no" maxlength="10" value="" /></div>
+			<table class="autoTable">
+				<tr>
+					<td class="lbl">
+						ไปยังบัญชี
+					</td>
+					<td>
+						<input type="text" class="form-control" id="to_acc_no" name="to_acc_no" maxlength="10" value="" /></div>
+					</td>
+				</tr>
+			</table>
 		</div>
 		<div class="form-group">
-			<label for="bank_code">ธนาคาร</label>
-			<div>
-				<select id="bank_code" name="bank_code">
-					<option value="">กรุณาเลือกธนาคาร</option>
-					{{range $n := .banks}}
-					<option value="{{.BKCD}}">{{.NAME}}</option>
-					{{end}}
-				</select>
-			</div>
+			<table class="autoTable">
+				<tr>
+					<td class="lbl">
+						ธนาคาร
+					</td>
+					<td>
+						<select id="bank_code" name="bank_code">
+							<option value="">กรุณาเลือกธนาคาร</option>
+							{{range $n := .banks}}
+							<option value="{{.BKCD}}">{{.NAME}}</option>
+							{{end}}
+						</select>
+					</td>
+				</tr>
+			</table>
 		</div>
 		<div class="form-group">
-			<label for="tamt">จำนวนเงิน</label>
-			<div><input type="number" class="form-control" id="tamt" name="tamt" maxlength="20" value="" /></div>
+			<table class="autoTable">
+				<tr>
+					<td class="lbl">
+						จำนวนเงิน
+					</td>
+					<td>
+						<input type="number" class="form-control" id="tamt" name="tamt" maxlength="20" value="" />
+					</td>
+				</tr>
+			</table>
 		</div>
-		
-		<input type="button" class="btn btn-primary" value="กลับหน้าแรก" class="button" onclick="window.location='/login'" />
-		<input type="submit" class="btn btn-primary" value="ตกลง" class="button" />
+		<div class="form-group">
+			<table class="autoTable">
+				<tr>
+					<td class="lbl"></td>
+					<td>
+						<input type="button" class="btn btn-primary" value="กลับหน้าแรก" class="button" onclick="window.location='/login'" />
+						<input type="submit" class="btn btn-primary" value="ตกลง" class="button" />
+					</td>
+				</tr>
+			</table>
+		</div>
 	</form>
 	
 	{{template "footer" .}}

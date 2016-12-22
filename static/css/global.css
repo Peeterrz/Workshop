@@ -24,3 +24,12 @@ h1, h2, h3, h4, h5, h6 {
 .alert-box-fixed {
   margin: 0 15px 15px 0;
 }
+
+.autoTable {
+	width: 100%;
+}
+
+.lbl {
+	font-weight: 700;
+	width: 100px;
+}
