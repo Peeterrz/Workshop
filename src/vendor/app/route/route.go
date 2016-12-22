@@ -119,12 +119,8 @@ func routes() *httprouter.Router {
 		ThenFunc(controller.TransferGET)))
 	r.POST("/v1/transfer", hr.Handler(alice.
 		New().
-		ThenFunc(controller.TransferPOST)))
-	//Transfer_Verify
-	r.GET("/v1/transfer/verify", hr.Handler(alice.
-		New().
 		ThenFunc(controller.Transfer_Verify)))
-	
+
 	return r
 }
 
