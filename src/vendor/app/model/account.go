@@ -18,30 +18,16 @@ func AccountByAccountNo(accountNo int) (Account, error){
 	var err error
 
 	result := Account{}
-
-	switch database.ReadConfig().Type {
-		case database.TypeMySQL:
-			err = database.SQL.Get(&result, "select cid, accname, bal, balavl, province,trno from ACN where cid = ?", accountNo)
-		case database.TypeMongoDB:
-		case database.TypeBolt:
-		default:
-			err = ErrCode
-	}
+	
+	err = database.SQL.Get(&result, "select cid, accname, bal, balavl, province,trno from ACN where cid = ?", accountNo)
 
 	return result, standardizeError(err)
 }
 
-
-
-
-func SetAccount(content string, userID string, noteID string) error {
+func UpdateAccount(content string, userID string, noteID string) error {
 	var err error
 
+	_, err = database.SQL.Exec("UPDATE note SET content=? WHERE id = ? AND user_id = ? LIMIT 1", content, noteID, userID)
 
-	switch database.ReadConfig().Type {
-	case database.TypeMySQL:
-		_, err = database.SQL.Exec("UPDATE note SET content=? WHERE id = ? AND user_id = ? LIMIT 1", content, noteID, userID)
-
-	}
 	return standardizeError(err)
 }

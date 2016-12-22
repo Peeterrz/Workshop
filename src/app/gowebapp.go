@@ -82,3 +82,7 @@ type configuration struct {
 func (c *configuration) ParseJSON(b []byte) error {
 	return json.Unmarshal(b, &c)
 }
+
+func XX() int{
+	return 0
+}
