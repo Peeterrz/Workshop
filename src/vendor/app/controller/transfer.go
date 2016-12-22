@@ -86,7 +86,6 @@ func Transfer_Post(w http.ResponseWriter, r *http.Request) {
 	
 	trnamt, err := strconv.ParseFloat(trnamtNoFormat, 64)
 	stramt := strconv.FormatFloat(trnamt, 'f', 2, 64)
-	log.Println("** trnamt = " + stramt)
 	
 	feeamt, err := strconv.ParseFloat(feeamtInput, 64)
 	totalamt := trnamt+feeamt
