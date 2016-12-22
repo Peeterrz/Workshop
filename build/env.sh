@@ -15,9 +15,6 @@ echo $PATH
 export GOPATH="$PWD"
 
 # LIB
-go get -v github.com/nsf/gocode
-go get -v golang.org/x/tools/cmd/guru
-go get -v github.com/rogpeppe/godef
 go get -v github.com/tebeka/go2xunit
 go get -v github.com/stretchr/testify/assert
 go get -v github.com/axw/gocov/gocov
