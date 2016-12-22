@@ -3,7 +3,7 @@
 {{define "content"}}
 
 <div class="container">
-	<form method="post">
+	<form method="post" action="/somkiatbank/transfer_post">
 		<table class="autoTable">
 			<tr>
 				<td class="lbl">
@@ -16,7 +16,8 @@
 					บัญชีเลขที่
 				</td>
 				<td class="form-group">
-					<span id="from_acc_no" name="from_acc_no">{{.from_acc_no}}</span>
+					<span id="#from_acc_no" name="#from_acc_no">{{.from_acc_no}}</span>
+					<input type="hidden" id="from_acc_no" name="from_acc_no" value="{{.from_acc_no}}" />
 				</td>
 			</tr>
 			<tr><td><div class="form-group"></div></td></tr>
@@ -41,7 +42,8 @@
 					บัญชีเลขที่
 				</td>
 				<td class="form-group">
-					<span id="to_acc_no" name="to_acc_no">{{.to_acc_no}}</span>
+					<span id="#to_acc_no" name="#to_acc_no">{{.to_acc_no}}</span>
+					<input type="hidden" id="to_acc_no" name="to_acc_no" value="{{.to_acc_no}}" />
 				</td>
 			</tr>
 			<tr><td><div class="form-group"></div></td></tr>
@@ -62,6 +64,7 @@
 				</td>
 				<td class="form-group">
 					<span id="bank_name" name="bank_name">{{.bank_name}}</span>
+					<input type="hidden" id="bank_code" name="bank_code" value="{{.bank_code}}" />
 				</td>
 			</tr>
 			<tr><td><div class="form-group"></div></td></tr>
@@ -71,6 +74,7 @@
 				</td>
 				<td class="form-group">
 					<span id="trn_amt" name="trn_amt">{{.trn_amt}}</span>
+					<input type="hidden" id="tamt" name="tamt" value="{{.trn_amt}}" />
 				</td>
 			</tr>
 			<tr><td><div class="form-group"></div></td></tr>
@@ -80,13 +84,14 @@
 				</td>
 				<td class="form-group">
 					<span id="fee_amt" name="fee_amt">{{.fee_amt}}</span>
+					<input type="hidden" id="feeamt" name="feeamt" value="{{.fee_amt}}" />
 				</td>
 			</tr>
 			<tr><td><div class="form-group"></div></td></tr>
 			<tr>
 				<td class="lbl"></td>
 				<td class="form-group">
-					<input type="button" class="btn btn-primary" value="กลับหน้าแรก" class="button" onclick="window.location='/somkiatbank/account/'+document.getElementById('from_acc_no').innerHTML" />
+					<input type="button" class="btn btn-primary" value="กลับหน้าแรก" class="button" onclick="window.location='/somkiatbank/account/'+document.getElementById('from_acc_no').value" />
 					<input type="submit" class="btn btn-primary" value="ตกลง" class="button" />
 				</td>
 			</tr>

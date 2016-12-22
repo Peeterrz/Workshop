@@ -1,7 +1,6 @@
 package controller
 
 import (
-	//"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -13,7 +12,6 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-// TransferGET displays the login page
 func TransferGET(w http.ResponseWriter, r *http.Request) {
 	var params httprouter.Params
 	params = context.Get(r, "params").(httprouter.Params)
@@ -25,7 +23,6 @@ func TransferGET(w http.ResponseWriter, r *http.Request) {
 		banks = []model.Bank{}
 	}
 	
-	// Display the view
 	v := view.New(r)
 	v.Name = "transfer/form"
 	v.Vars["from_acc_no"] = from_acc_no
@@ -58,7 +55,6 @@ func Transfer_Verify(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}  
 	
-	// Display the view
 	v := view.New(r)
 	v.Name = "transfer/transfer_verify"
 	v.Vars["from_acc_no"] = accountFromObj.CID
@@ -72,27 +68,19 @@ func Transfer_Verify(w http.ResponseWriter, r *http.Request) {
 	v.Render(w)
 }
 
-
 func Transfer_Post(w http.ResponseWriter, r *http.Request) {
-	
-	
-	
 	accfromInput := r.FormValue("from_acc_no")
 	acctoInput := r.FormValue("to_acc_no")
 	bankInput := r.FormValue("bank_code")
 	trnamtInput := r.FormValue("tamt")
 	feeamtInput := r.FormValue("feeamt")
-	
 
-	
 	accfrom, err := strconv.Atoi(accfromInput)
 	accto, err := strconv.Atoi(acctoInput)
 	bankCode, err := strconv.Atoi(bankInput)
 	trnamt, err := strconv.ParseFloat(trnamtInput, 64)
 	feeamt, err := strconv.ParseFloat(feeamtInput, 64)
 	totalamt := trnamt+feeamt
-
-
 
 	accountFromObj, err := model.AccountByAccountNo(accfrom)
 	if err != nil {
@@ -109,14 +97,11 @@ func Transfer_Post(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}  
 	
-	
 	err = Post(accountFromObj,accountToObj,totalamt)
 	if err != nil {
 		panic(err)
 	}  
 	
-	
-	// Display the view
 	v := view.New(r)
 	v.Name = "transfer/transfer_post"
 	v.Vars["from_acc_no"] = accountFromObj.CID
@@ -126,12 +111,7 @@ func Transfer_Post(w http.ResponseWriter, r *http.Request) {
 	v.Vars["bank_name"] = bankObj.NAME
 	v.Vars["trn_amt"] = trnamt
 	v.Vars["fee_amt"] = feeamt
-
-
-
 	v.Render(w)
-	
-	
 }
 
 func FeeCal(accountFromObj model.Account ,accountToObj model.Account)(output float64) {
@@ -155,10 +135,7 @@ func Interregion(accountFromObj model.Account ,accountToObj model.Account)(outpu
 	return output
 }
 
-
 func Post(accountFromObj model.Account ,accountToObj model.Account,totalamt float64,)(err error) {
-	
-	
 	FromAccountNewBal := accountFromObj.BAL-totalamt
 	FromAccountNewBalAvl := accountFromObj.BALAVL-totalamt
 	FromAccountTrno := accountFromObj.TRNO+1
@@ -167,17 +144,14 @@ func Post(accountFromObj model.Account ,accountToObj model.Account,totalamt floa
 	ToAccountNewBalAvl := accountToObj.BALAVL+totalamt
 	ToAccountTrno := accountToObj.TRNO
 	
+	err = model.UpdateAccountAfterTransaction(accountFromObj.CID,FromAccountNewBal,FromAccountNewBalAvl,FromAccountTrno)
+	if err != nil {
+		panic(err)
+	}  
+	err = model.UpdateAccountAfterTransaction(accountToObj.CID,ToAccountNewBal,ToAccountNewBalAvl,ToAccountTrno)
+	if err != nil {
+		panic(err)
+	} 
 	
-	 err = model.UpdateAccountAfterTransaction(accountFromObj.CID,FromAccountNewBal,FromAccountNewBalAvl,FromAccountTrno)
-	 if err != nil {
-			panic(err)
-	 }  
-	 	
-	 err = model.UpdateAccountAfterTransaction(accountToObj.CID,ToAccountNewBal,ToAccountNewBalAvl,ToAccountTrno)
-	 if err != nil {
-			panic(err)
-	 } 
-	
-	 return err
-
+	return err
 }
