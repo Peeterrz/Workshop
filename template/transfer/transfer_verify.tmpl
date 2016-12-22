@@ -3,61 +3,97 @@
 {{define "content"}}
 
 <div class="container">
-	<div class="page-header">
-		<h1>{{template "title" .}}</h1>
-	</div>
-	
 	<form method="post">
-		<div>
-			โอนเงินจาก
-		</div>
-		<div class="form-group">
-			<label for="from_acc_no">บัญชีเลขที่</label>
-			<div><span id="from_acc_no" name="from_acc_no">{{.from_acc_no}}</span></div>
-		</div>
-		
-		<div class="form-group">
-			<label for="from_acc_no">ชื่อบัญชี</label>
-			<div><span id="from_acc_name" name="from_acc_name">{{.from_acc_name}}</span></div>
-		</div>
-		
-		<div>
-			ไปที่
-		</div>
-		
-		<div class="form-group">
-			<label for="to_acc_no">บัญชีเลขที่</label>
-			<div><span id="to_acc_no" name="to_acc_no">{{.to_acc_no}}</span></div>
-		</div>
-	
-	
-		<div class="form-group">
-			<label for="to_acc_no">ชื่อบัญชี</label>
-			<div><span id="to_acc_name" name="to_acc_name">{{.to_acc_name}}</span></div>
-		</div>
-		
-		<div class="form-group">
-			<label for="bank_name">ชื่อธนาคาร</label>
-			<div><span id="bank_name" name="bank_name">{{.bank_name}}</span></div>
-		</div>
-		
-		<div class="form-group">
-			<label for="trn_amt">จำนวนเงิน</label>
-			<div><span id="trn_amt" name="trn_amt">{{.trn_amt}}</span></div>
-		</div>
-		
-		<div class="form-group">
-			<label for="fee_amt">ค่าธรรมเนียม</label>
-			<div><span id="fee_amt" name="fee_amt">{{.fee_amt}}</span></div>
-		</div>
-	
-	
-	
-	
-		<input type="button" class="btn btn-primary" value="กลับหน้าแรก" class="button" />
-		<input type="submit" class="btn btn-primary" value="ตกลง" class="button" />
-		
+		<table class="autoTable">
+			<tr>
+				<td class="lbl">
+					โอนเงินจาก
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td class="lbl">
+					บัญชีเลขที่
+				</td>
+				<td class="form-group">
+					<span id="from_acc_no" name="from_acc_no">{{.from_acc_no}}</span>
+				</td>
+			</tr>
+			<tr><td><div class="form-group"></div></td></tr>
+			<tr>
+				<td class="lbl">
+					ชื่อบัญชี
+				</td>
+				<td class="form-group">
+					<span id="from_acc_name" name="from_acc_name">{{.from_acc_name}}</span>
+				</td>
+			</tr>
+			<tr><td><div class="form-group"></div></td></tr>
+			<tr>
+				<td class="lbl">
+					ไปที่
+				</td>
+				<td class="form-group"></td>
+			</tr>
+			<tr><td><div class="form-group"></div></td></tr>
+			<tr>
+				<td class="lbl">
+					บัญชีเลขที่
+				</td>
+				<td class="form-group">
+					<span id="to_acc_no" name="to_acc_no">{{.to_acc_no}}</span>
+				</td>
+			</tr>
+			<tr><td><div class="form-group"></div></td></tr>
+			<tr>
+				<td class="lbl">
+					ชื่อบัญชี
+				</td>
+				<td class="form-group">
+					<span id="to_acc_name" name="to_acc_name">{{.to_acc_name}}</span>
+				</td>
+			</tr>
+			<tr><td><div class="form-group"></div></td></tr>
+			
+			
+			<tr>
+				<td class="lbl">
+					ธนาคาร
+				</td>
+				<td class="form-group">
+					<span id="bank_name" name="bank_name">{{.bank_name}}</span>
+				</td>
+			</tr>
+			<tr><td><div class="form-group"></div></td></tr>
+			<tr>
+				<td class="lbl">
+					จำนวนเงิน
+				</td>
+				<td class="form-group">
+					<span id="trn_amt" name="trn_amt">{{.trn_amt}}</span>
+				</td>
+			</tr>
+			<tr><td><div class="form-group"></div></td></tr>
+			<tr>
+				<td class="lbl">
+					ค่าธรรมเนียม
+				</td>
+				<td class="form-group">
+					<span id="fee_amt" name="fee_amt">{{.fee_amt}}</span>
+				</td>
+			</tr>
+			<tr><td><div class="form-group"></div></td></tr>
+			<tr>
+				<td class="lbl"></td>
+				<td class="form-group">
+					<input type="button" class="btn btn-primary" value="กลับหน้าแรก" class="button" onclick="window.location='/somkiatbank/account/'+document.getElementById('from_acc_no').innerHTML" />
+					<input type="submit" class="btn btn-primary" value="ตกลง" class="button" />
+				</td>
+			</tr>
+		</table>
 	</form>
+	
+	{{template "footer" .}}
 </div>
 
 {{end}}
