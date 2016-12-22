@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"app/controller"
-	"app/route/middleware/acl"
 	hr "app/route/middleware/httprouterwrapper"
 	"app/route/middleware/logrequest"
 	"app/route/middleware/pprofhandler"
@@ -59,60 +58,21 @@ func routes() *httprouter.Router {
 		New().
 		ThenFunc(controller.IndexGET)))
 
-	// Login
-	r.GET("/login", hr.Handler(alice.
-		New(acl.DisallowAuth).
-		ThenFunc(controller.LoginGET)))
-	r.POST("/login", hr.Handler(alice.
-		New(acl.DisallowAuth).
-		ThenFunc(controller.LoginPOST)))
-	r.GET("/logout", hr.Handler(alice.
-		New().
-		ThenFunc(controller.LogoutGET)))
-
-	// Register
-	r.GET("/register", hr.Handler(alice.
-		New(acl.DisallowAuth).
-		ThenFunc(controller.RegisterGET)))
-	r.POST("/register", hr.Handler(alice.
-		New(acl.DisallowAuth).
-		ThenFunc(controller.RegisterPOST)))
-
 	// About
 	r.GET("/about", hr.Handler(alice.
 		New().
 		ThenFunc(controller.AboutGET)))
 
-	// Notepad
-	r.GET("/notepad", hr.Handler(alice.
-		New(acl.DisallowAnon).
-		ThenFunc(controller.NotepadReadGET)))
-	r.GET("/notepad/create", hr.Handler(alice.
-		New(acl.DisallowAnon).
-		ThenFunc(controller.NotepadCreateGET)))
-	r.POST("/notepad/create", hr.Handler(alice.
-		New(acl.DisallowAnon).
-		ThenFunc(controller.NotepadCreatePOST)))
-	r.GET("/notepad/update/:id", hr.Handler(alice.
-		New(acl.DisallowAnon).
-		ThenFunc(controller.NotepadUpdateGET)))
-	r.POST("/notepad/update/:id", hr.Handler(alice.
-		New(acl.DisallowAnon).
-		ThenFunc(controller.NotepadUpdatePOST)))
-	r.GET("/notepad/delete/:id", hr.Handler(alice.
-		New(acl.DisallowAnon).
-		ThenFunc(controller.NotepadDeleteGET)))
-
 	// Enable Pprof
 	r.GET("/debug/pprof/*pprof", hr.Handler(alice.
 		New().
 		ThenFunc(pprofhandler.Handler)))
-	
+
 	// Account Overview
 	r.GET("/demobank/:account_no_input", hr.Handler(alice.
 		New().
 		ThenFunc(controller.AccountOverviewGET)))
-	
+
 	// Account Transfer
 	r.GET("/v1/transfer/form/:acc_no", hr.Handler(alice.
 		New().
