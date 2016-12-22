@@ -1,17 +1,22 @@
 {{define "title"}}{{end}}
 {{define "head"}}{{end}}
 {{define "content"}}
-
-<div class="container">
-	<form method="post" action="/somkiatbank/transfer">
+	
+	<div class="container">
 		<table class="autoTable">
 			<tr>
 				<td class="lbl">
-					จากบัญชี
+					โอนเงินสำเร็จ
+				</td>
+				<td></td>
+			</tr>
+			<tr><td><div class="form-group"></div></td></tr>
+			<tr>
+				<td class="lbl">
+					ทำการโอนเงินจากบัญชี
 				</td>
 				<td class="form-group">
 					<span id="from_acc_no" name="from_acc_no">{{.from_acc_no}}</span>
-					<input type="hidden" id="#from_acc_no" name="#from_acc_no" value="{{.from_acc_no}}" />
 				</td>
 			</tr>
 			<tr><td><div class="form-group"></div></td></tr>
@@ -19,8 +24,17 @@
 				<td class="lbl">
 					ไปยังบัญชี
 				</td>
-				<td>
-					<input type="text" class="form-control" id="to_acc_no" name="to_acc_no" maxlength="10" value="" /></div>
+				<td class="form-group">
+					<span id="to_acc_no" name="to_acc_no">{{.to_acc_no}}</span>
+				</td>
+			</tr>
+			<tr><td><div class="form-group"></div></td></tr>
+			<tr>
+				<td class="lbl">
+					ชื่อบัญชี
+				</td>
+				<td class="form-group">
+					<span id="to_acc_name" name="to_acc_name">{{.to_acc_name}}</span>
 				</td>
 			</tr>
 			<tr><td><div class="form-group"></div></td></tr>
@@ -28,13 +42,8 @@
 				<td class="lbl">
 					ธนาคาร
 				</td>
-				<td>
-					<select id="bank_code" name="bank_code">
-						<option value="">กรุณาเลือกธนาคาร</option>
-						{{range $n := .banks}}
-						<option value="{{.BKCD}}">{{.NAME}}</option>
-						{{end}}
-					</select>
+				<td class="form-group">
+					<span id="bank_name" name="bank_name">{{.bank_name}}</span>
 				</td>
 			</tr>
 			<tr><td><div class="form-group"></div></td></tr>
@@ -42,8 +51,17 @@
 				<td class="lbl">
 					จำนวนเงิน
 				</td>
-				<td>
-					<input type="number" class="form-control" id="tamt" name="tamt" maxlength="20" value="" />
+				<td class="form-group">
+					<span id="trn_amt" name="trn_amt">{{.trn_amt}}</span>
+				</td>
+			</tr>
+			<tr><td><div class="form-group"></div></td></tr>
+			<tr>
+				<td class="lbl">
+					ค่าธรรมเนียม
+				</td>
+				<td class="form-group">
+					<span id="fee_amt" name="fee_amt">{{.fee_amt}}</span>
 				</td>
 			</tr>
 			<tr><td><div class="form-group"></div></td></tr>
@@ -51,14 +69,10 @@
 				<td class="lbl"></td>
 				<td>
 					<input type="button" class="btn btn-primary" value="กลับหน้าแรก" class="button" onclick="window.location='/somkiatbank/account/'+document.getElementById('from_acc_no').innerHTML" />
-					<input type="submit" class="btn btn-primary" id="btn_ok" value="ตกลง" class="button" />
 				</td>
 			</tr>
 		</table>
-	</form>
+	</div>
 	
-	{{template "footer" .}}
-</div>
-
 {{end}}
 {{define "foot"}}{{end}}
