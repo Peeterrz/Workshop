@@ -1,0 +1,78 @@
+{{define "title"}}{{end}}
+{{define "head"}}{{end}}
+{{define "content"}}
+	
+	<div class="container">
+		<table class="autoTable">
+			<tr>
+				<td class="lbl">
+					โอนเงินสำเร็จ
+				</td>
+				<td></td>
+			</tr>
+			<tr><td><div class="form-group"></div></td></tr>
+			<tr>
+				<td class="lbl">
+					ทำการโอนเงินจากบัญชี
+				</td>
+				<td class="form-group">
+					<span id="from_acc_no" name="from_acc_no">{{.from_acc_no}}</span>
+				</td>
+			</tr>
+			<tr><td><div class="form-group"></div></td></tr>
+			<tr>
+				<td class="lbl">
+					ไปยังบัญชี
+				</td>
+				<td class="form-group">
+					<span id="to_acc_no" name="to_acc_no">{{.to_acc_no}}</span>
+				</td>
+			</tr>
+			<tr><td><div class="form-group"></div></td></tr>
+			<tr>
+				<td class="lbl">
+					ชื่อบัญชี
+				</td>
+				<td class="form-group">
+					<span id="to_acc_name" name="to_acc_name">{{.to_acc_name}}</span>
+				</td>
+			</tr>
+			<tr><td><div class="form-group"></div></td></tr>
+			<tr>
+				<td class="lbl">
+					ธนาคาร
+				</td>
+				<td class="form-group">
+					<span id="bank_name" name="bank_name">{{.bank_name}}</span>
+				</td>
+			</tr>
+			<tr><td><div class="form-group"></div></td></tr>
+			<tr>
+				<td class="lbl">
+					จำนวนเงิน
+				</td>
+				<td class="form-group">
+					<span id="trn_amt" name="trn_amt">{{.trn_amt}}</span>
+				</td>
+			</tr>
+			<tr><td><div class="form-group"></div></td></tr>
+			<tr>
+				<td class="lbl">
+					ค่าธรรมเนียม
+				</td>
+				<td class="form-group">
+					<span id="fee_amt" name="fee_amt">{{.fee_amt}}</span>
+				</td>
+			</tr>
+			<tr><td><div class="form-group"></div></td></tr>
+			<tr>
+				<td class="lbl"></td>
+				<td>
+					<input type="button" class="btn btn-primary" value="กลับหน้าแรก" class="button" onclick="window.location='/somkiatbank/account/'+document.getElementById('from_acc_no').innerHTML" />
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+{{end}}
+{{define "foot"}}{{end}}
