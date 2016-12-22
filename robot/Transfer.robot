@@ -6,7 +6,7 @@
 	Click Button    btn_ok
 	Transfer Page    ${from_acc_no}    ${to_acc_no}    ${to_bank_code}    ${tamt}    ${testcase_id}
 	Comfirmation Page       ${from_acc_no}    ${from_acc_name}    ${to_acc_no}    ${to_acc_name}    ${to_bank_name}    ${tamt}    ${fee_amt}    ${testcase_id}
-	#Successful Page      ${from_acc_no}    ${from_acc_name}    ${to_acc_no}    ${to_acc_name}    ${to_bank_name}    ${tamt}    ${fee_amt}    ${testcase_id}
+	Successful Page      ${from_acc_no}    ${from_acc_name}    ${to_acc_no}    ${to_acc_name}    ${to_bank_name}    ${tamt}    ${fee_amt}    ${testcase_id}
 
 Transfer Page
 	[Arguments]    ${from_acc_no}    ${to_acc_no}    ${to_bank_code}    ${tamt}    ${testcase_id}
