@@ -1,4 +1,4 @@
-{{define "title"}}Account Overview{{end}}
+{{define "title"}}{{end}}
 {{define "head"}}{{end}}
 {{define "content"}}
 
@@ -8,21 +8,50 @@
 	</div>
 	<form method="post">
 		<div class="form-group">
-			<label for="Acount Name">ชื่อบัญชี</label>&nbsp;
-			<span id="acc_name" name="acc_name" >{{.acc_name}}</span>
-			<input type="hidden" class="form-control" id="acc_name" name="acc_name" placeholder="Account Name" value="{{.acc_name}}"/>
+			<table class="autoTable">
+				<tr>
+					<td class="lbl form-group">
+						ชื่อบัญชี :
+					</td>
+					<td class="form-group">
+						<span id="acc_name" name="acc_name" >{{.acc_name}}</span>
+					</td>
+				</tr>
+			</table>
 		</div>
-		
 		<div class="form-group">
-			<label for="Account No">เลขที่บัญชี</label>&nbsp;
-			<span id="acc_no" name="acc_no" >{{.acc_no}}</span>
-			<div><input type="hidden" class="form-control" id="acc_no" name="acc_no" placeholder="Account No" value="{{.acc_no}}" /></div>
+			<table class="autoTable">
+				<tr>
+					<td class="lbl form-group">
+						เลขที่บัญชี :
+					</td>
+					<td class="form-group">
+						<span id="acc_no" name="acc_no" >{{.acc_no}}</span>
+					</td>
+				</tr>
+			</table>
 		</div>
-		
 		<div class="form-group">
-			<label for="Account Balance">ยอดคงเหลือ</label>
-			<span id="acc_bal" name="acc_bal" >{{.acc_bal}}</span>
-			<div><input type="hidden" class="form-control" id="acc_bal" name="acc_bal" placeholder="Account Balance" value="{{.acc_bal}}" /></div>
+			<table class="autoTable">
+				<tr>
+					<td class="lbl form-group">
+						ยอดคงเหลือ :
+					</td>
+					<td class="form-group">
+						<span id="acc_bal" name="acc_bal" >{{.acc_bal}}</span>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="form-group">
+			<table class="autoTable">
+				<tr>
+					<td class="lbl"></td>
+					<td>
+						<input type="button" class="btn btn-primary" value="โอนเงิน" class="button" onclick="window.location='/somkiatbank/transfer/form/'+document.getElementById('acc_no').innerHTML" />						
+					</td>
+				</tr>
+			</table>
 		</div>
 	</form>
 	
