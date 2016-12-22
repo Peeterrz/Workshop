@@ -2,3 +2,4 @@
 pkg/
 *.db.lock
 *.db
+src/vendor/app/controller/_transfer_verify.go
