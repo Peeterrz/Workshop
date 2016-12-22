@@ -145,7 +145,16 @@ func Interregion(accountFromObj model.Account ,accountToObj model.Account)(outpu
 func Post(accountFromObj model.Account ,accountToObj model.Account,totalamt float64,)(err error) {
 	FromAccountNewBal := accountFromObj.BAL-totalamt
 	FromAccountNewBalAvl := accountFromObj.BALAVL-totalamt
-	FromAccountTrno := accountFromObj.TRNO+1
+	
+	Interegion := Interregion(accountFromObj,accountToObj)
+	
+	if (Interegion) {
+		FromAccountTrno := accountFromObj.TRNO+1
+	} else
+	{
+		FromAccountTrno := accountFromObj.TRNO
+	}
+	
 	
 	ToAccountNewBal := accountToObj.BAL+totalamt
 	ToAccountNewBalAvl := accountToObj.BALAVL+totalamt
