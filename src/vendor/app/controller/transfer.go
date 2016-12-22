@@ -148,11 +148,12 @@ func Post(accountFromObj model.Account ,accountToObj model.Account,totalamt floa
 	
 	Interegion := Interregion(accountFromObj,accountToObj)
 	
+	var FromAccountTrno int64
 	if (Interegion) {
-		FromAccountTrno := accountFromObj.TRNO+1
+		FromAccountTrno = accountFromObj.TRNO+1
 	} else
 	{
-		FromAccountTrno := accountFromObj.TRNO
+		FromAccountTrno = accountFromObj.TRNO
 	}
 	
 	
