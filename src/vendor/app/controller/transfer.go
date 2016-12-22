@@ -79,15 +79,14 @@ func Transfer_Post(w http.ResponseWriter, r *http.Request) {
 	feeamtInput := r.FormValue("feeamt")
 	
 	trnamtNoFormat := strings.Replace(utilities.Substring(trnamtInput, 0, len([]rune(trnamtInput))-4), ",", "", -1)
+	feeamtNoFormat := strings.Replace(utilities.Substring(feeamtInput, 0, len([]rune(feeamtInput))-4), ",", "", -1)
 	
 	accfrom, err := strconv.Atoi(accfromInput)
 	accto, err := strconv.Atoi(acctoInput)
 	bankCode, err := strconv.Atoi(bankInput)
 	
 	trnamt, err := strconv.ParseFloat(trnamtNoFormat, 64)
-	stramt := strconv.FormatFloat(trnamt, 'f', 2, 64)
-	
-	feeamt, err := strconv.ParseFloat(feeamtInput, 64)
+	feeamt, err := strconv.ParseFloat(feeamtNoFormat, 64)
 	totalamt := trnamt+feeamt
 
 	accountFromObj, err := model.AccountByAccountNo(accfrom)
