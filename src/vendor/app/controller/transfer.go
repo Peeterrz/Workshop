@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"strings"
 	
 	"app/shared/view"
 	"app/model"
@@ -76,12 +77,16 @@ func Transfer_Post(w http.ResponseWriter, r *http.Request) {
 	bankInput := r.FormValue("bank_code")
 	trnamtInput := r.FormValue("trn_amt")
 	feeamtInput := r.FormValue("feeamt")
-
+	
+	trnamtNoFormat := strings.Replace(utilities.Substring(trnamtInput, 0, len([]rune(trnamtInput))-4), ",", "", -1)
+	feeamtNoFormat := strings.Replace(utilities.Substring(feeamtInput, 0, len([]rune(feeamtInput))-4), ",", "", -1)
+	
 	accfrom, err := strconv.Atoi(accfromInput)
 	accto, err := strconv.Atoi(acctoInput)
 	bankCode, err := strconv.Atoi(bankInput)
-	trnamt, err := strconv.ParseFloat(trnamtInput, 64)
-	feeamt, err := strconv.ParseFloat(feeamtInput, 64)
+	
+	trnamt, err := strconv.ParseFloat(trnamtNoFormat, 64)
+	feeamt, err := strconv.ParseFloat(feeamtNoFormat, 64)
 	totalamt := trnamt+feeamt
 
 	accountFromObj, err := model.AccountByAccountNo(accfrom)
@@ -111,8 +116,8 @@ func Transfer_Post(w http.ResponseWriter, r *http.Request) {
 	v.Vars["to_acc_name"] = accountToObj.ACCNAME
 	v.Vars["bank_code"] = bankObj.BKCD
 	v.Vars["bank_name"] = bankObj.NAME
-	v.Vars["trn_amt"] = trnamt
-	v.Vars["fee_amt"] = feeamt
+	v.Vars["trn_amt"] = utilities.ThaiCurrencyFormat(trnamt)
+	v.Vars["fee_amt"] = utilities.ThaiCurrencyFormat(feeamt)
 	v.Render(w)
 }
 
@@ -140,7 +145,17 @@ func Interregion(accountFromObj model.Account ,accountToObj model.Account)(outpu
 func Post(accountFromObj model.Account ,accountToObj model.Account,totalamt float64,)(err error) {
 	FromAccountNewBal := accountFromObj.BAL-totalamt
 	FromAccountNewBalAvl := accountFromObj.BALAVL-totalamt
-	FromAccountTrno := accountFromObj.TRNO+1
+	
+	Interegion := Interregion(accountFromObj,accountToObj)
+	
+	var FromAccountTrno int64
+	if (Interegion) {
+		FromAccountTrno = accountFromObj.TRNO+1
+	} else
+	{
+		FromAccountTrno = accountFromObj.TRNO
+	}
+	
 	
 	ToAccountNewBal := accountToObj.BAL+totalamt
 	ToAccountNewBalAvl := accountToObj.BALAVL+totalamt
