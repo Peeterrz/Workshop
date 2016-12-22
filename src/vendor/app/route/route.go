@@ -46,7 +46,12 @@ func routes() *httprouter.Router {
 	r.NotFound = alice.
 		New().
 		ThenFunc(controller.Error404)
-		
+
+	// Serve static files, no directory browsing
+	r.GET("/static/*filepath", hr.Handler(alice.
+		New().
+		ThenFunc(controller.Static)))
+
 	// Home page
 	r.GET("/", hr.Handler(alice.
 		New().
