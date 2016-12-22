@@ -1,9 +1,11 @@
 package main
 
 import "testing"
+import "github.com/stretchr/testify/assert"
 
 func TestTimeConsuming(t *testing.T) {
-	if (XX()==0){
-		t.Skipped()
-	}
+
+	z := XX()
+	assert.Equal(t, z, 0, "xxx")
+
 }
