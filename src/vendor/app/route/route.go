@@ -80,6 +80,9 @@ func routes() *httprouter.Router {
 	r.POST("/somkiatbank/transfer", hr.Handler(alice.
 		New().
 		ThenFunc(controller.Transfer_Verify)))
+	r.POST("/somkiatbank/transfer_post", hr.Handler(alice.
+		New().
+		ThenFunc(controller.Transfer_Post)))
 
 	return r
 }
