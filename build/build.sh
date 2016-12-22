@@ -11,21 +11,20 @@ go get -v ./...
 go get -v ./...
 
 # Run tests (JUnit plugin)
-#rm -f test.out
-#touch test.out
-#echo "mode: set" > coverage.out
-#for pkg in $(go list ./...);
-#do
-#    if [[ $pkg != *"vendor"* ]]; then
-#      echo "testing... ${pkg}"
-#      go test -v -coverprofile=tmp.out ${pkg} >> test.out
-#      if [ -f tmp.out ]; then
-#         cat tmp.out | grep -v "mode: set" >> coverage.out
-#      fi
-#    fi  
-#done
+rm -f test.out
+echo "mode: set" > coverage.out
+for pkg in $(go list ./...);
+do
+    if [[ $pkg != *"vendor"* ]]; then
+      echo "testing... ${pkg}"
+      go test -v -coverprofile=tmp.out ${pkg} >> test.out
+      if [ -f tmp.out ]; then
+         cat tmp.out | grep -v "mode: set" >> coverage.out
+      fi
+    fi  
+done
 
-go test vendor/app/utilities -coverprofile=tmp.out ${pkg} >> test.out
+#go test vendor/app/utilities -coverprofile=tmp.out ${pkg} >> test.out
 rm -f ./tmp.out
 cat test.out | go2xunit -output tests.xml
 
