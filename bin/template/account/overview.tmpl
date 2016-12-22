@@ -1,0 +1,63 @@
+{{define "title"}}{{end}}
+{{define "head"}}{{end}}
+{{define "content"}}
+
+<div class="container">
+	<form method="post">
+		<div class="form-group">
+			<table class="autoTable">
+				<tr>
+					<td class="lbl form-group">
+						ชื่อบัญชี :
+					</td>
+					<td class="form-group">
+						<span id="acc_name" name="acc_name" >{{.acc_name}}</span>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="form-group">
+			<table class="autoTable">
+				<tr>
+					<td class="lbl form-group">
+						เลขที่บัญชี :
+					</td>
+					<td class="form-group">
+						<span id="acc_no" name="acc_no" >{{.acc_no}}</span>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="form-group">
+			<table class="autoTable">
+				<tr>
+					<td class="lbl form-group">
+						ยอดคงเหลือ :
+					</td>
+					<td class="form-group">
+						<span id="acc_bal" name="acc_bal" >{{.acc_bal}}</span>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="form-group">
+			<table class="autoTable">
+				<tr>
+					<td class="lbl"></td>
+					<td>
+						<input type="button" class="btn btn-primary" id="btn_ok" value="โอนเงิน" class="button" onclick="window.location='/somkiatbank/transfer/form/'+document.getElementById('acc_no').innerHTML" />						
+					</td>
+				</tr>
+			</table>
+		</div>
+	</form>
+	
+	<p style="margin-top: 15px;color:red;">
+	{{.errorMessage}}
+	</p>
+	
+	{{template "footer" .}}
+</div>
+
+{{end}}
+{{define "foot"}}{{end}}
