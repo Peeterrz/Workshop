@@ -12,7 +12,6 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-// accountOverviewGET displays the account overview page
 func AccountOverviewGET(w http.ResponseWriter, r *http.Request) {
 	
 	log.Println("Account Overview GET : Start")	
@@ -40,6 +39,6 @@ func AccountOverviewGET(w http.ResponseWriter, r *http.Request) {
 	
 	v.Vars["acc_no"] = utilities.PadLeft(accInput, "0", 10)
 	v.Vars["acc_name"] = accountObj.ACCNAME
-	v.Vars["acc_bal"] = accountObj.BALAVL
+	v.Vars["acc_bal"] = utilities.ThaiCurrencyFormat(accountObj.BALAVL)
 }
 
