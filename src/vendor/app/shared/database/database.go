@@ -4,19 +4,15 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"time"
 
 	"github.com/boltdb/bolt"
 	_ "github.com/go-sql-driver/mysql" // MySQL driver
 	"github.com/jmoiron/sqlx"
-	"gopkg.in/mgo.v2"
 )
 
 var (
 	// BoltDB wrapper
 	BoltDB *bolt.DB
-	// Mongo wrapper
-	Mongo *mgo.Session
 	// SQL wrapper
 	SQL *sqlx.DB
 	// Database info
@@ -105,20 +101,6 @@ func Connect(d Info) {
 		if BoltDB, err = bolt.Open(d.Bolt.Path, 0600, nil); err != nil {
 			log.Println("Bolt Driver Error", err)
 		}
-	case TypeMongoDB:
-		// Connect to MongoDB
-		if Mongo, err = mgo.DialWithTimeout(d.MongoDB.URL, 5*time.Second); err != nil {
-			log.Println("MongoDB Driver Error", err)
-			return
-		}
-
-		// Prevents these errors: read tcp 127.0.0.1:27017: i/o timeout
-		Mongo.SetSocketTimeout(1 * time.Second)
-
-		// Check if is alive
-		if err = Mongo.Ping(); err != nil {
-			log.Println("Database Error", err)
-		}
 	default:
 		log.Println("No registered database in config")
 	}
@@ -187,19 +169,6 @@ func Delete(bucketName string, key string) error {
 		return b.Delete([]byte(key))
 	})
 	return err
-}
-
-// CheckConnection returns true if MongoDB is available
-func CheckConnection() bool {
-	if Mongo == nil {
-		Connect(databases)
-	}
-
-	if Mongo != nil {
-		return true
-	}
-
-	return false
 }
 
 // ReadConfig returns the database information
