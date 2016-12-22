@@ -10,7 +10,7 @@ type Bank struct {
 	ENAME		string 		`db:"ename"`
 }
 
-func GetBanks() ([]Bank, error){
+func Banks() ([]Bank, error){
 	
 	var err error
 
@@ -22,13 +22,13 @@ func GetBanks() ([]Bank, error){
 }
 
 
-func GetBanksCode(bankcd int) (Bank, error){
+func BanksByBankCode(bankCode int) (Bank, error){
 	
 	var err error
 
 	result := Bank{}
 	
-	err = database.SQL.Get(&result, "select bkcd, name, ename from ZUTBLBK where bkcd = ?", bankcd)
+	err = database.SQL.Get(&result, "select bkcd, name, ename from ZUTBLBK where bkcd = ?", bankCode)
 	
 	return result, standardizeError(err)
 }
