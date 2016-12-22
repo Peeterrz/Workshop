@@ -24,10 +24,10 @@ func AccountByAccountNo(accountNo int) (Account, error){
 	return result, standardizeError(err)
 }
 
-func UpdateAccount(content string, userID string, noteID string) error {
+func UpdateAccountAfterTransaction(accountNo int64, bal float64, balavl float64, trno int64) error {
 	var err error
 
-	_, err = database.SQL.Exec("UPDATE note SET content=? WHERE id = ? AND user_id = ? LIMIT 1", content, noteID, userID)
+	_,err = database.SQL.Exec("update ACN set bal=?,balavl=?,trno=? WHERE cid=?", bal, balavl, trno,accountNo)
 
 	return standardizeError(err)
 }

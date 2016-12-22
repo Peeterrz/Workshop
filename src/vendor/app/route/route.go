@@ -58,16 +58,16 @@ func routes() *httprouter.Router {
 		ThenFunc(controller.IndexGET)))
 	
 	// Account Overview
-	r.GET("/demobank/:account_no_input", hr.Handler(alice.
+	r.GET("/somkiatbank/account/:account_no_input", hr.Handler(alice.
 		New().
 		ThenFunc(controller.AccountOverviewGET)))
 
 	// Account Transfer
-	r.GET("/v1/transfer/form/:acc_no", hr.Handler(alice.
+	r.GET("/somkiatbank/transfer/form/:acc_no", hr.Handler(alice.
 		New().
 		ThenFunc(controller.TransferGET)))
-	
-	r.POST("/v1/transfer", hr.Handler(alice.
+
+	r.POST("/somkiatbank/transfer", hr.Handler(alice.
 		New().
 		ThenFunc(controller.Transfer_Verify)))
 
