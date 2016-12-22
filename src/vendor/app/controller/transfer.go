@@ -69,8 +69,8 @@ func Transfer_Verify(w http.ResponseWriter, r *http.Request) {
 }
 
 func Transfer_Post(w http.ResponseWriter, r *http.Request) {
-	accfromInput := r.FormValue("from_acc_no")
-	acctoInput := r.FormValue("to_acc_no")
+	accfromInput := r.FormValue("#from_acc_no")
+	acctoInput := r.FormValue("#to_acc_no")
 	bankInput := r.FormValue("bank_code")
 	trnamtInput := r.FormValue("tamt")
 	feeamtInput := r.FormValue("feeamt")
