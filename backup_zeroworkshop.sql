@@ -65,7 +65,7 @@ CREATE TABLE `ZUTBLBK` (
 
 LOCK TABLES `ZUTBLBK` WRITE;
 /*!40000 ALTER TABLE `ZUTBLBK` DISABLE KEYS */;
-INSERT INTO `ZUTBLBK` VALUES (0,'ธนาคารสมเกียรติ จำกัด','Somkiat Bank'),(2,'ธนาคารกรุงเทพ จำกัด','Bangkok Bank'),(4,'ธนาคารกสิกรไทย จำกัด','Kasikorn Bank'),(6,'ธนาคารกรุงไทย จำกัด','Krungthai Bank'),(11,'ธนาคารทหารไทย จำกัด','TMB Bank');
+INSERT INTO `ZUTBLBK` VALUES (0,'ธนาคารสมเกียรติ','Somkiat Bank'),(2,'ธนาคารกรุงเทพ','Bangkok Bank'),(4,'ธนาคารกสิกรไทย','Kasikorn Bank'),(6,'ธนาคารกรุงไทย','Krungthai Bank'),(11,'ธนาคารทหารไทย','TMB Bank');
 /*!40000 ALTER TABLE `ZUTBLBK` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
