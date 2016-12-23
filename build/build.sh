@@ -16,7 +16,7 @@ touch tmp.out
 echo "mode: set" > coverage.out
 for pkg in $(go list ./...);
 do
-    if [[ $pkg != *"github.com"* ]]; then
+    if [[ $pkg != *"github.com"* || $pkg != *"gopkg.in"* ]]; then
       echo "testing... ${pkg}"
       go test -v -coverprofile=tmp.out ${pkg} >> test.out
       if [ -f tmp.out ]; then
