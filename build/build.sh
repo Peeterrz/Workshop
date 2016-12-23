@@ -16,7 +16,7 @@ touch tmp.out
 echo "mode: set" > coverage.out
 for pkg in $(go list ./...);
 do
-    if [[ $pkg != *"github.com"* || $pkg != *"gopkg.in"* ]]; then
+    if [[ ($pkg != *"github.com"*) && ($pkg != *"gopkg.in"*) && ($pkg != *"golang.org"*) ]]; then
       echo "testing... ${pkg}"
       go test -v -coverprofile=tmp.out ${pkg} >> test.out
       if [ -f tmp.out ]; then
@@ -25,7 +25,6 @@ do
     fi  
 done
 
-#go test vendor/app/utilities -coverprofile=tmp.out ${pkg} >> test.out
 rm -f ./tmp.out
 cat test.out | go2xunit -output tests.xml
 
