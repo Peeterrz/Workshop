@@ -10,9 +10,7 @@ import (
 
 	"app/route"
 	"app/shared/database"
-	"app/shared/email"
 	"app/shared/jsonconfig"
-	"app/shared/recaptcha"
 	"app/shared/server"
 	"app/shared/session"
 	"app/shared/view"
@@ -44,17 +42,13 @@ func main() {
 	// Connect to database
 	database.Connect(config.Database)
 
-	// Configure the Google reCAPTCHA prior to loading view plugins
-	recaptcha.Configure(config.Recaptcha)
-
 	// Setup the views
 	view.Configure(config.View)
 	view.LoadTemplates(config.Template.Root, config.Template.Children)
 	view.LoadPlugins(
 		plugin.TagHelper(config.View),
 		plugin.NoEscape(),
-		plugin.PrettyTime(),
-		recaptcha.Plugin())
+		plugin.PrettyTime())
 
 	// Start the listener
 	server.Run(route.LoadHTTP(), route.LoadHTTPS(), config.Server)
@@ -69,13 +63,11 @@ var config = &configuration{}
 
 // configuration contains the application settings
 type configuration struct {
-	Database  database.Info   `json:"Database"`
-	Email     email.SMTPInfo  `json:"Email"`
-	Recaptcha recaptcha.Info  `json:"Recaptcha"`
-	Server    server.Server   `json:"Server"`
-	Session   session.Session `json:"Session"`
-	Template  view.Template   `json:"Template"`
-	View      view.View       `json:"View"`
+	Database database.Info   `json:"Database"`
+	Server   server.Server   `json:"Server"`
+	Session  session.Session `json:"Session"`
+	Template view.Template   `json:"Template"`
+	View     view.View       `json:"View"`
 }
 
 // ParseJSON unmarshals bytes to structs
