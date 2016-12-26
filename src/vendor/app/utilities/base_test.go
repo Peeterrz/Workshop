@@ -65,3 +65,43 @@ func Test_ThaiCurrencyFormat_minus1000000254_return_minus100000025(t *testing.T)
 	output := ThaiCurrencyFormat(input)
 	assert.Equal(t, "-1,000,000.25 บาท", output)
 }
+
+func Test_Substring_start0_LengthIs1_return_firstChar(t *testing.T) {
+	param1 := "ทดสอบตัดสตริง"
+	param2 := 0
+	param3 := 1
+	output := Substring(param1, param2, param3)
+	assert.Equal(t,"ท", output)
+}
+
+func Test_Substring_start0_LengthInNegative_return_allString(t *testing.T) {
+	param1 := "ทดสอบตัดสตริง"
+	param2 := 0
+	param3 := -1
+	output := Substring(param1, param2, param3)
+	assert.Equal(t,"ทดสอบตัดสตริง", output)
+}
+
+func Test_Substring_start0_LengthIs5_return_first5Char(t *testing.T) {
+	param1 := "ทดสอบตัดสตริง"
+	param2 := 0
+	param3 := 5
+	output := Substring(param1, param2, param3)
+	assert.Equal(t,"ทดสอบ", output)
+}
+
+func Test_Substring_start0_LengthIsGreaterThanString_return_allString(t *testing.T) {
+	param1 := "ทดสอบตัดสตริง"
+	param2 := 0
+	param3 := len([]rune(param1)) + 3
+	output := Substring(param1, param2, param3)
+	assert.Equal(t,"ทดสอบตัดสตริง", output)
+}
+
+func Test_Substring_startInNegative_LengthIs2_return_first2Char(t *testing.T) {
+	param1 := "ทดสอบตัดสตริง"
+	param2 := -3
+	param3 := 2
+	output := Substring(param1, param2, param3)
+	assert.Equal(t,"ทด", output)
+}
